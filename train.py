@@ -229,6 +229,15 @@ def main():
         opt = optim.Adam(net.parameters(), lr=LR)
         train(env, pi, net, loss_fn, opt)
 
+    # Sample code to run play_with_reward function
+    # for _ in range(num_episodes):
+    #     episode_reward = play_with_reward(env, pi)
+    #     total_rewards.append(episode_reward)
 
+    #     average_reward = np.mean(total_rewards)
+
+    #     print(f"Test Results over {num_episodes} episodes:")
+    #     print(f"Average Reward: {average_reward:.3f}")
+    #     print(f"Standard Deviation: {np.std(total_rewards):.3f}")
 if __name__ == "__main__":
     main()
