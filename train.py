@@ -187,6 +187,23 @@ def play(env, pi):
             break
         s = s2
 
+def play_with_reward(env, pi):
+    episode_reward = 0
+    actions = []
+    s,info = env.reset()
+    while True:
+        _, a = pi(s)
+        actions.append(a)
+        s2, reward, terminiated, truncated, _ = env.step(a)
+        episode_reward += reward
+        if terminiated:
+            print(f"actions: {actions}")
+            print(f"episode_reward: {episode_reward}")
+            env.render()
+            break
+        s = s2
+    
+    return episode_reward
 
 def main():
     parser = argparse.ArgumentParser()
