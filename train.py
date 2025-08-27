@@ -1,3 +1,30 @@
+################################################################################################
+# make_linear_decay_schedule: 
+# 	epsilon一般是开始的时候比较大，这样有比较大的随机性；随着迭代过程，epsilon逐渐缩小，整个过程也逐步收敛。 
+# 	设置一个迭代次数的阈值decay_episodes = NUM_EPISODES * decay_pc / 100， 
+# 	当迭代次数<=decay_episodes： 每次迭代epsilon增加（end_val - start_val）/ decay_episodes <-- 这是一个负数，所以是减少。 
+# 	当迭代次数>decay_episodes： 就是用end_val
+
+# Net: 定义一个20 + 1的网络
+
+# evaluate_valid_actions
+# 	对于当前状态s,找出所有可能的action
+# 	对于所有s+action的组合，调用board.move 得出下一个状态s2
+# 	对于每一个s2,调用net函数算出这个状态的value (s2_value)
+
+# make_policy
+# 	返回一个函数pi，pi函数针对当前状态s，调用evaluate_valid_actions的出所有可能的action和对应的下一个状态的s2_value
+# 	然后找出其中最大的s2_value 和 action
+
+# Train
+# 	reset状态s
+# 	在每次迭代中
+# 		通过pi函数计算出最大的s2_value和对应的action a
+# 		和env互动计算出这个action a 的reward r
+# 		调用net函数计算出s的s_value
+# 		现在net函数学习的目标就是 r + (1 - terminiated) * GAMMA * s2_value 和 s_value的差异
+# 		调用net的backprop功能来更新参数 <--这是q-learning/a2c共同的思想
+################################################################################################
 import argparse
 import numpy as np
 import torch
