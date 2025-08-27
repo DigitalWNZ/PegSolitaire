@@ -4,7 +4,8 @@
 # iter_locations： 根据boarder shape记录下棋盘的形状， 变量为LOCATIONS
 # iter_action: 遍历LOCATIONS中的所有location
 # 				用它做from_location, 在所有方向上看via_location, to_location
-# 				只要from/via/to_location都在棋盘范围内，那么都算作潜在的action
+# 				只要from/via/to_location都在棋盘范围内，那么都算作潜在的action = （from_location, via_location, to_location）
+#               所有的潜在actions都封装在ACTIONS数组内，通过index获取。 
 # Class Board
 # 	reset：返回一个中心为空的棋盘
 
