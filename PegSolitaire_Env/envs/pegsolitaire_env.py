@@ -1,4 +1,6 @@
 ################################################################################################
+# REF: https://github.com/taylorjg/solitaire-rl-py
+#      https://github.com/taylorjg/gym-solitaire/blob/master/gym_solitaire/envs/solitaire_env.py
 # iter_locations： 根据boarder shape记录下棋盘的形状， 变量为LOCATIONS
 # iter_action: 遍历LOCATIONS中的所有location
 # 				用它做from_location, 在所有方向上看via_location, to_location
