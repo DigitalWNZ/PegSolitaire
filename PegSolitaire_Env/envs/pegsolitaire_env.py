@@ -1,3 +1,37 @@
+################################################################################################
+# iter_locations： 根据boarder shape记录下棋盘的形状， 变量为LOCATIONS
+# iter_action: 遍历LOCATIONS中的所有location
+# 				用它做from_location, 在所有方向上看via_location, to_location
+# 				只要from/via/to_location都在棋盘范围内，那么都算作潜在的action
+# Class Board
+# 	reset：返回一个中心为空的棋盘
+
+# 	is_valid_action: 从潜在action中选出所有from/via_location有棋子， to_location没有棋子的action。 
+# 	valid_action: 调用is_valid_action返回所有from/via_location有棋子， to_location没有棋子的action。
+# 	terminated： 没有valid action了。 
+# 	make_move： 校验from/via/to_location 是否都在棋盘内，满足条件后from/via_location置为空， to_location置为占用，返回board对象
+
+# 	board_to_obs: 返回一维数组记录LOCATIONS中每个位置的占用情况
+# 	obs_to_board：从一维数组恢复成棋盘的样子
+
+
+
+
+# Class PegSolitaireEnv
+# 	reset： 调用Board.reset方法并通过board_to_obs返回一维数组
+# 	step：
+# 		调用Board.terminated方法校验状态是否为terminated； 如果是terminated, 返回reward = 0 <-- 这个实际上不会发生因为每次执行动作都会再次判断状态。 
+# 		看action是否为有效action， 如果无效，返回reward = -100
+# 		调用Board.move 完成action
+# 		再次校验状态是否为terminated； 如果是terminated, 调用_calculate_final_reward计算当前局总的reward；否则当前步骤的reward = 0
+
+# 	render： 在终端上输出棋盘
+# 	_calculate_final_reward： 在棋局结束的时候看棋盘上所有剩下的棋子
+# 								对每个棋子计算和中心点的行差和列差，计算manhattan_distance_from_centre = 行差 + 列差 <--剩的棋子离中心点越远，结果越不好。 
+# 							    reward = reward- manhattan_distance_from_centre 
+# 							  如果reward = 0，代表没有棋子剩下，那么当前局的reward = 100， 
+# 							  否则就是 -sum(manhattan_distance_from_centre)
+################################################################################################
 from collections import namedtuple
 from gymnasium import Env, spaces
 import numpy as np
